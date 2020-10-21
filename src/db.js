@@ -66,8 +66,8 @@ function getUser(email,password,callback){
   })
 }
 
-function saveUser(user){
-  fs.writeFileSync(`${__dirname}/userdb/${user.uuid}.json`,JSON.stringify(data,null,4));
+function setUser(user){
+  fs.writeFileSync(`${__dirname}/userdb/${user.uuid}.json`,JSON.stringify(user,null,4));
 }
 
 //Rejestracja nowego użytkownika
@@ -88,7 +88,7 @@ function registerNewUser(email,password,callback){
           type:""
         }
       }
-      saveUser(data)
+      setUser(data)
       callback("OK")
     }
   })
@@ -97,5 +97,5 @@ function registerNewUser(email,password,callback){
 module.exports={
   registerNewUser,
   getUser,
-  saveUser
+  setUser
 }
