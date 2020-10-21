@@ -160,7 +160,21 @@ app.get('/register_user_data/', (req, res) => {
       res.send({resp:"err"})
     }
   })
+})
 
+
+app.get("/get_data/",(req,res)=>{
+  var email=req.query.email;
+  var password=req.query.password;
+  findUser(email,(user)=>{
+    if(user==null){
+      res.json({resp:"err"})
+    }else if(user.password==password){
+      res.json({resp:user})
+    }else{
+      res.json({resp:"err"})
+    }
+  })
 })
 
 //Nasłuchiwanie
