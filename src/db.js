@@ -66,8 +66,16 @@ function getUser(email,password,callback){
   })
 }
 
-function setUser(user){
-  fs.writeFileSync(`${__dirname}/userdb/${user.uuid}.json`,JSON.stringify(user,null,4));
+function setUser(user,callback){
+  getUser(user.email,user.password,(userx)=>{
+    if(userx!=null){
+      fs.writeFileSync(`${__dirname}/userdb/${user.uuid}.json`,JSON.stringify(user,null,4));
+      callback("ok")
+    }else{
+      callback("err")
+    }
+  })
+
 }
 
 //Rejestracja nowego użytkownika

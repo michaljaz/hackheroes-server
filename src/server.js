@@ -44,7 +44,9 @@ app.get("/get_data/",(req,res)=>{
 //Klient może zapisywać dane
 app.get("/set_data/",(req,res)=>{
   var user=JSON.parse(req.query.user)
-  db.setUser(user)
+  db.setUser(user,(resp)=>{
+    res.json({resp})
+  })
 })
 
 //Nasłuchiwanie
