@@ -68,7 +68,7 @@ function getUser(email,password,callback){
 
 function setUser(user,callback){
   getUser(user.email,user.password,(userx)=>{
-    if(userx!=null){
+    if(userx==null){
       fs.writeFileSync(`${__dirname}/userdb/${user.uuid}.json`,JSON.stringify(user,null,4));
       callback("ok")
     }else{
@@ -96,8 +96,13 @@ function registerNewUser(email,password,callback){
           type:""
         }
       }
-      setUser(data)
-      callback("OK")
+      setUser(data,(resp)=>{
+        if(resp=="ok"){
+          callback("OK")
+        }else{
+          callback("EXIST")
+        }
+      })
     }
   })
 }
